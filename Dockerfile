@@ -12,7 +12,7 @@
 # the License.
 #
 
-FROM rtfpessoa/ubuntu-jdk8:latest as builder
+FROM luohua13/ubuntu-jdk8:latest as builder
 
 ENV APP_HOME /app/
 
@@ -28,7 +28,7 @@ COPY mvnw $APP_HOME
 WORKDIR $APP_HOME
 RUN ./mvnw package -Dlicense.skip=true -DskipTests && rm -rf ~/.m2
 
-FROM rtfpessoa/ubuntu-jre8:1.0.5
+FROM luohua13/ubuntu-jre8:latest
 MAINTAINER Pavol Loffay <ploffay@redhat.com>
 ENV APP_HOME /app/
 COPY --from=builder $APP_HOME/jaeger-spark-dependencies/target/jaeger-spark-dependencies-0.0.1-SNAPSHOT.jar $APP_HOME/
